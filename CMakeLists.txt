@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(THIS "cmake_project_template")
-
-project(${THIS})
+project(cmake_project_template)
 
 if(NOT CMAKE_BUILD_TYPE)
 	message(STATUS "Setting build type to Release, for debug builds use '-DCMAKE_BUILD_TYPE=Debug'.")
