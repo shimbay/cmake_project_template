@@ -46,15 +46,13 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json")
 endif()
 
 # install dot before enable dependency tree
-set(ENABLE_DT OFF CACHE BOOL "enable exporting graphviz dependency tree")
+option(ENABLE_DT "enable exporting graphviz dependency tree" OFF)
 if(ENABLE_DT)
 	message("enable dependency tree")
 	set(DT_DIR "dt")
 	set(DT_FILE_NAME "dependency_tree")
-	add_custom_target(graphviz ALL
-	    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-	    COMMAND mkdir -p ${DT_DIR}
-	    COMMAND ${CMAKE_COMMAND} "--graphviz=${DT_DIR}/${DT_FILE_NAME}.dot" ..
-	    COMMAND dot -Tpng ${DT_DIR}/${DT_FILE_NAME}.dot -o ${DT_FILE_NAME}.png
-	)
+
+	execute_process(COMMAND cd ${CMAKE_BINARY_DIR} && mkdir -p ${DT_DIR})
+	execute_process(COMMAND ${CMAKE_COMMAND} "--graphviz=${DT_DIR}/${DT_FILE_NAME}.dot" ${CMAKE_SOURCE_DIR})
+	execute_process(COMMAND dot -Tpng ${DT_DIR}/${DT_FILE_NAME}.dot -o ${DT_FILE_NAME}.png)
 endif()
