@@ -8,4 +8,4 @@ public:
   static void TearDownTestSuite() {}
 };
 
-TEST_F(SumTest, Sum) { ASSERT_EQ(3, sum(1, 2)); }
+TEST_F(SumTest, Sum) { ASSERT_EQ(3, Sum(1, 2)); }

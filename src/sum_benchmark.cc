@@ -5,7 +5,7 @@ static void BM_Sum(benchmark::State &state) {
   // Perform setup here
   for (auto _ : state) {
     // This code gets timed
-    sum(1, 2);
+    Sum(1, 2);
   }
 }
 
