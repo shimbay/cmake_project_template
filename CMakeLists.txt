@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(cmake_project_template)
+project(cmake_project_template VERSION 1.0.0)
 
 if(NOT CMAKE_BUILD_TYPE)
-	message(STATUS "Setting build type to Release, for debug builds use '-DCMAKE_BUILD_TYPE=Debug'.")
-	set(CMAKE_BUILD_TYPE "Release")
+  message(
+    STATUS
+      "Setting build type to Release, for debug builds use '-DCMAKE_BUILD_TYPE=Debug'."
+  )
+  set(CMAKE_BUILD_TYPE "Release")
 endif()
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -12,7 +15,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/module")
 set(THIRD_PARTY_SOURCE_DIR "${CMAKE_SOURCE_DIR}/third_party")
 
-set(FETCHCONTENT_QUIET OFF CACHE BOOL "" FORCE)
+set(FETCHCONTENT_QUIET
+    OFF
+    CACHE BOOL "" FORCE)
 
 set(PROJECT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(PROJECT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -39,20 +44,18 @@ add_subdirectory(benchmark)
 print_target_properties(${PROJECT_NAME}_benchmark)
 
 if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json")
-    execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json
-        ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json
-    )
+  execute_process(
+    COMMAND
+      ${CMAKE_COMMAND} -E copy_if_different
+      ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json
+      ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
 endif()
 
-# install dot before enable dependency tree
-option(ENABLE_DT "enable exporting graphviz dependency tree" OFF)
-if(ENABLE_DT)
-	message("enable dependency tree")
-	set(DT_DIR "dt")
-	set(DT_FILE_NAME "dependency_tree")
-
-	execute_process(COMMAND cd ${CMAKE_BINARY_DIR} && mkdir -p ${DT_DIR})
-	execute_process(COMMAND ${CMAKE_COMMAND} "--graphviz=${DT_DIR}/${DT_FILE_NAME}.dot" ${CMAKE_SOURCE_DIR})
-	execute_process(COMMAND dot -Tpng ${DT_DIR}/${DT_FILE_NAME}.dot -o ${DT_FILE_NAME}.png)
-endif()
+set(DT_DIR "dt")
+set(DT_FILE_NAME "dt")
+add_custom_target(
+  dt
+  COMMAND cd ${CMAKE_BINARY_DIR} && mkdir -p ${DT_DIR}
+  COMMAND ${CMAKE_COMMAND} "--graphviz=${DT_DIR}/${DT_FILE_NAME}.dot"
+          ${CMAKE_SOURCE_DIR}
+  COMMAND dot -Tpng ${DT_DIR}/${DT_FILE_NAME}.dot -o ${DT_FILE_NAME}.png)

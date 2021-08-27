@@ -3,10 +3,23 @@
 - A `CMake` based project template for `C++`, with test and benchmark template.
 - Manage external dependencies by `CMake FindPackage`, the module config file are located in `cmake/module`.
 - Export dependency tree by `graphviz` & `dot`, enable this feature by `-DENABLE_DT`.
-- Support file with suffix of .cc or .cpp.
-- Place test code in the same directory of source code, and with a suffix of `_test`.
-- Place benchmark code in the same directory of source code, and with a suffix of `_benchmark`.
+- Code file
+	- Support file with suffix of .cc or .cpp.
+	- Place test code in the same directory of source code, and with a suffix of `_test`.
+	- Place benchmark code in the same directory of source code, and with a suffix of `_benchmark`.
+- Code format
+	- `script/format.sh` formats all the `C/C++` file, `CMake` file and `shell` script.
+- Doc
+	- `Doxygen` for `C++` document generation.
+	```
+	doxygen .doxygen.conf
+	```
+	- `html` document will output to `doc/api/html` directory
 
 # Build
 
-- `mkdir -p build && cd build && cmake .. -DENABLE_DT=ON && make -j 10`
+- `mkdir -p build && cd build && cmake .. && make -j 10`
+
+# Dependency Graph
+
+- `make dt`

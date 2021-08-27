@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 
 class SumTest : public ::testing::Test {
-public:
+ public:
   static void SetUpTestSuite() {}
 
   static void TearDownTestSuite() {}

@@ -10,4 +10,3 @@ static void BM_Sum(benchmark::State &state) {
 }
 
 BENCHMARK(BM_Sum);
-
