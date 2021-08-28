@@ -51,11 +51,11 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json")
       ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
 endif()
 
-set(DT_DIR "dt")
-set(DT_FILE_NAME "dt")
+set(DG_DIR "dg")
+set(DG_FILE_NAME "dg")
 add_custom_target(
-  dt
-  COMMAND cd ${CMAKE_BINARY_DIR} && mkdir -p ${DT_DIR}
-  COMMAND ${CMAKE_COMMAND} "--graphviz=${DT_DIR}/${DT_FILE_NAME}.dot"
+  dg
+  COMMAND cd ${CMAKE_BINARY_DIR} && mkdir -p ${DG_DIR}
+  COMMAND ${CMAKE_COMMAND} "--graphviz=${DG_DIR}/${DG_FILE_NAME}.dot"
           ${CMAKE_SOURCE_DIR}
-  COMMAND dot -Tpng ${DT_DIR}/${DT_FILE_NAME}.dot -o ${DT_FILE_NAME}.png)
+  COMMAND dot -Tpng ${DG_DIR}/${DG_FILE_NAME}.dot -o ${DG_FILE_NAME}.png)
