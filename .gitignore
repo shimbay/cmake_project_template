@@ -1,3 +1,4 @@
+.cache
 build
 third_party
 compile_commands.json
