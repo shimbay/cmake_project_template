@@ -7,5 +7,6 @@ print_variable(${PROJECT_NAME}_BENCHMARKS)
 # benchmark target
 add_executable(${PROJECT_NAME}_benchmark benchmark_main.cc $<TARGET_OBJECTS:${PROJECT_NAME}_core> ${${PROJECT_NAME}_BENCHMARKS})
 target_link_libraries(${PROJECT_NAME}_benchmark PRIVATE 
-	gbenchmark
+  gbenchmark
+  ${LINK_TARGETS}
 )

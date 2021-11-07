@@ -10,6 +10,7 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release")
 endif()
 
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-g")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/module")
@@ -29,6 +30,8 @@ include(cmake/util.cmake)
 
 include_directories(include)
 include_directories(src)
+
+set(LINK_TARGETS "")
 
 add_subdirectory(src)
 print_target_properties(${PROJECT_NAME}_core)
@@ -59,4 +62,3 @@ add_custom_target(
   COMMAND ${CMAKE_COMMAND} "--graphviz=${DG_DIR}/${DG_FILE_NAME}.dot"
           ${CMAKE_SOURCE_DIR}
   COMMAND dot -Tpng ${DG_DIR}/${DG_FILE_NAME}.dot -o ${DG_FILE_NAME}.png)
-

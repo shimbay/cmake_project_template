@@ -7,6 +7,7 @@ print_variable(${PROJECT_NAME}_TESTS)
 # test target
 add_executable(${PROJECT_NAME}_test test_main.cc $<TARGET_OBJECTS:${PROJECT_NAME}_core> ${${PROJECT_NAME}_TESTS})
 target_link_libraries(${PROJECT_NAME}_test PRIVATE 
-	gtest
+  gtest
+  ${LINK_TARGETS}
 )
 
